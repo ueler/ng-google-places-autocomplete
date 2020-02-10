@@ -37,6 +37,32 @@ import {TypeaheadModule} from 'ngx-bootstrap/typeahead';
 npm install @ueler/ng-google-places-autocomplete --save
 ```
 
+4\. Import module and configure API Key:  
+
+You need a Google Maps API Key in order to run places search queries. 
+Please follow this guide on how to get one: [Get API Key](https://developers.google.com/places/web-service/get-api-key).
+
+Provide the API key as config to your module:
+```
+import {
+  NG_GOOGLE_PLACES_AUTOCOMPLETE_SETTINGS,
+  NgGooglePlacesAutocompleteSettings
+} from '@ueler/ng-google-places-autocomplete';
+
+@NgModule({
+  providers: [
+    {
+      provide: NG_GOOGLE_PLACES_AUTOCOMPLETE_SETTINGS,
+      useValue: {
+        googleMapsApiKey: 'GOOGLE_MAPS_API_KEY_HERE'
+      } as NgGooglePlacesAutocompleteSettings,
+    },
+  ]
+})
+export class MyModule {
+}
+```
+
 ## Usage
 Basic usage:
 ```
