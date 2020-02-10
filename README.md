@@ -1,7 +1,8 @@
 # @ueler/ng-google-places-autocomplete
 Angular component for Google Maps Places autocomplete.
 
-[![npm version](https://badge.fury.io/js/%40ueler%2Fng-google-places-autocomplete.svg)](https://badge.fury.io/js/%40ueler%2Fng-google-places-autocomplete)
+[![npm version](https://badge.fury.io/js/%40ueler%2Fng-google-places-autocomplete.svg)](https://badge.fury.io/js/%40ueler%2Fng-google-places-autocomplete) &nbsp;
+[![Actions Status](https://github.com/ueler/ng-google-places-autocomplete/workflows/Build%20and%20Test/badge.svg)](https://github.com/ueler/ng-google-places-autocomplete/actions)
 
 ## Introduction
 This library offers a component 
