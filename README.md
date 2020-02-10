@@ -10,6 +10,10 @@ to easily integrate a Google Maps Places autocomplete typeahead into your projec
 - Configurable request options (e.g. to limit the results to specific country)
 - Returns places details (including long,lat,etc.) when user selects an option
 
+## Stackblitz Example App
+See the component in action in this example app:
+https://stackblitz.com/edit/angular-bzuvbk
+
 ## Installation
 The library relies on the [ngx-bootstrap](https://github.com/valor-software/ngx-bootstrap) typeahead component. 
 Therefore the first step is to install that peer dependency.  
@@ -39,9 +43,9 @@ npm install @ueler/ng-google-places-autocomplete --save
 
 4\. Import module and configure API Key:  
 
-You need a Google Maps API Key in order to run places search queries. 
-Please follow this guide on how to get one: [Get API Key](https://developers.google.com/places/web-service/get-api-key).
-
+You need a Google Maps API Key in order to run places search queries.  
+Please follow this guide on how to get one: [Get API Key](https://developers.google.com/places/web-service/get-api-key)
+(you need to select the APIs _Places API_ and _Maps JavaScript API_ for the key).
 Provide the API key as config to your module:
 ```
 import {
@@ -76,7 +80,7 @@ Perform an action when user selects an option:
 ```
 The ``$event`` contains the selected option of the type ``PlaceResult`` (https://developers.google.com/maps/documentation/javascript/reference/places-service#PlaceResult).
 
-## Configuration
+## Configuration Options
 An optional configuration can be passed to the component to configure the typeahead results
 ```
 <lib-ng-google-places-autocomplete [requestOptions]="requestOptions">
