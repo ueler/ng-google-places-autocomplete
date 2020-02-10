@@ -1,6 +1,8 @@
 # @ueler/ng-google-places-autocomplete
 Angular component for Google Maps Places autocomplete.
 
+[![npm version](https://badge.fury.io/js/%40ueler%2Fng-google-places-autocomplete.svg)](https://badge.fury.io/js/%40ueler%2Fng-google-places-autocomplete)
+
 ## Introduction
 This library offers a component 
 to easily integrate a Google Maps Places autocomplete typeahead into your project.
