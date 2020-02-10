@@ -100,7 +100,7 @@ import {
     {
       provide: NG_GOOGLE_PLACES_AUTOCOMPLETE_SETTINGS,
       useValue: {
-        googleMapsApiKey: 'AIzaSyBFuTSlusmjRGbJne2QT78pQctkmWfUqoo',
+        googleMapsApiKey: 'YOUR_GOOGLE_MAPS_API_KEY',
         locale: 'de'
       } as NgGooglePlacesAutocompleteSettings
     },
