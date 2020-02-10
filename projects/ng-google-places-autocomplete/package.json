@@ -2,9 +2,10 @@
   "name": "@ueler/ng-google-places-autocomplete",
   "version": "0.0.1",
   "peerDependencies": {
-    "@angular/common": "^8.2.14",
-    "@angular/core": "^8.2.14",
-    "ngx-bootstrap": "^5.3.2"
+    "@angular/common": ">=8.2.14",
+    "@angular/core": ">=8.2.14",
+    "ngx-bootstrap": ">=5.3.2",
+    "rxjs": ">=6.0.0"
   },
   "devDependencies": {
     "@types/googlemaps": "^3.39.2",
@@ -12,5 +13,17 @@
   },
   "dependencies": {
     "@ueler/ng-lazyload-script": "0.0.4"
-  }
+  },
+  "description": "Angular component for Google Maps Places Autocomplete",
+  "keywords": [
+    "angular",
+    "angular2",
+    "autocomplete",
+    "google-maps",
+    "google-api",
+    "google-places",
+    "component",
+    "geocoder"
+  ],
+  "repository": "https://github.com/ueler/ng-google-places-autocomplete"
 }
