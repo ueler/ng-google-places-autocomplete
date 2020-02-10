@@ -13,6 +13,7 @@ import PlaceResult = google.maps.places.PlaceResult;
 import AutocompletionRequest = google.maps.places.AutocompletionRequest;
 import AutocompletePrediction = google.maps.places.AutocompletePrediction;
 import PlaceDetailsRequest = google.maps.places.PlaceDetailsRequest;
+import PlacesServiceStatus = google.maps.places.PlacesServiceStatus;
 
 @Component({
   selector: 'lib-ng-google-places-autocomplete',
@@ -98,14 +99,16 @@ export class NgGooglePlacesAutocompleteComponent implements OnInit {
     });
     return callBackAsObservable(request).pipe(
       map(result => {
-        return result[0];
+        const predictions: AutocompletePrediction[] = result[0];
+        const status: PlacesServiceStatus = result[1];
+
+        if (status === 'OK') {
+          return predictions;
+        } else {
+          return [];
+        }
       })
     );
-  }
-
-  reset() {
-    this.addressInputText = '';
-    this.addressChanged.emit(undefined);
   }
 
   optionSelect($event: TypeaheadMatch) {
