@@ -1,5 +1,13 @@
-import { TestBed, async } from '@angular/core/testing';
-import { AppComponent } from './app.component';
+import {async, TestBed} from '@angular/core/testing';
+import {AppComponent} from './app.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {BrowserModule} from '@angular/platform-browser';
+import {TypeaheadModule} from 'ngx-bootstrap/typeahead';
+import {
+  NG_GOOGLE_PLACES_AUTOCOMPLETE_SETTINGS,
+  NgGooglePlacesAutocompleteModule,
+  NgGooglePlacesAutocompleteSettings
+} from '../../../ng-google-places-autocomplete/src/public-api';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -7,6 +15,21 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent
       ],
+      imports: [
+        BrowserAnimationsModule,
+        BrowserModule,
+        TypeaheadModule.forRoot(),
+        NgGooglePlacesAutocompleteModule
+      ],
+      providers: [
+        {
+          provide: NG_GOOGLE_PLACES_AUTOCOMPLETE_SETTINGS,
+          useValue: {
+            googleMapsApiKey: 'GOOGLE_MAPS_API_KEY_HERE',
+            locale: 'de'
+          } as NgGooglePlacesAutocompleteSettings
+        },
+      ]
     }).compileComponents();
   }));
 
@@ -14,18 +37,5 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
-  });
-
-  it(`should have as title 'ng-google-places-autocomplete-example'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('ng-google-places-autocomplete-example');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('ng-google-places-autocomplete-example app is running!');
   });
 });

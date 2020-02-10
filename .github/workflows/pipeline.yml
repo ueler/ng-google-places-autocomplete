@@ -1,17 +1,36 @@
-name: CI
-
-on: [push]
+name: Build and Test
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [10.x]
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Run a one-line script
-      run: echo Hello, world!
-    - name: Run a multi-line script
-      run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
+      - uses: actions/checkout@v1
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: npm install
+        run: |
+          npm ci
+
+      - name: build
+        run: |
+          npm run build-all
+
+      - name: test
+        run: |
+          npm run test-all
+
+      - name: e2e
+        run: |
+          npm run e2e-all

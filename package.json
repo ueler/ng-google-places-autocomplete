@@ -7,7 +7,10 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "build-all":  "ng build ng-google-places-autocomplete && ng build ng-google-places-autocomplete-example",
+    "test-all": "ng test ng-google-places-autocomplete --watch=false --browsers=ChromeHeadless && ng test ng-google-places-autocomplete-example --watch=false --browsers=ChromeHeadless",
+    "e2e-all": "ng e2e ng-google-places-autocomplete-example"
   },
   "private": true,
   "dependencies": {
