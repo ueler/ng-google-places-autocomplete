@@ -96,3 +96,6 @@ requestOptions: AutocompletionRequestOptions = {
     componentRestrictions: {country: 'CH'}
 };
 ```
+
+## Compatibility
+The library is compatible with Angular versions ``>=8.2.14`` and ngx-bootstrap ``>=5.3.2``.
