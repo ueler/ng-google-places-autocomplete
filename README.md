@@ -1,27 +1,66 @@
-# NgGooglePlacesAutocomplete
+# @ueler/ng-google-places-autocomplete
+Angular component for Google Maps Places autocomplete.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.6.
+## Introduction
+This library offers a component 
+to easily integrate a Google Maps Places autocomplete typeahead into your project.
 
-## Development server
+### Features
+- Uses Bootstrap styling classes
+- Configurable request options (e.g. to limit the results to specific country)
+- Returns places details (including long,lat,etc.) when user selects an option
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Installation
+The library relies on the [ngx-bootstrap](https://github.com/valor-software/ngx-bootstrap) typeahead component. 
+Therefore the first step is to install that peer dependency.  
+(Note: The library is tree-shakeable, therefore only using the typeahead module doesn't add much to your application size.)
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+1\. Install ``ngx-bootstrap``:
+```
+npm install ngx-bootstrap --save
+```
 
-## Build
+2\. Add typeahead package to NgModule imports:
+```
+import {TypeaheadModule} from 'ngx-bootstrap/typeahead';
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+@NgModule({
+  ...
+  imports: [TypeaheadModule.forRoot(),...]
+  ...
+})
+```
 
-## Running unit tests
+3\. Install ``@ueler/ng-google-places-autocomplete``
+```
+npm install @ueler/ng-google-places-autocomplete --save
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Usage
+Basic usage:
+```
+<lib-ng-google-places-autocomplete></lib-ng-google-places-autocomplete>
+```
 
-## Running end-to-end tests
+Perform an action when user selects an option:
+```
+<lib-ng-google-places-autocomplete (addressChanged)="addressChanged($event)">
+</lib-ng-google-places-autocomplete>
+```
+The ``$event`` contains the selected option of the type ``PlaceResult`` (https://developers.google.com/maps/documentation/javascript/reference/places-service#PlaceResult).
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+## Configuration
+An optional configuration can be passed to the component to configure the typeahead results
+```
+<lib-ng-google-places-autocomplete [requestOptions]="requestOptions">
+</lib-ng-google-places-autocomplete>
+```
+See [google.maps.places.AutocompleteRequest object specification](https://developers.google.com/maps/documentation/javascript/reference/places-autocomplete-service#AutocompletionRequest) for valid options.
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+For example, to limit the results to Switzerland, you can specify the following configuration and pass it to the component:
+```
+requestOptions: AutocompletionRequestOptions = {
+    componentRestrictions: {country: 'CH'}
+};
+```
