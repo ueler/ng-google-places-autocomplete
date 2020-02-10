@@ -8,6 +8,11 @@
       "root": "projects/ng-google-places-autocomplete",
       "sourceRoot": "projects/ng-google-places-autocomplete/src",
       "prefix": "lib",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
@@ -159,6 +164,7 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "ng-google-places-autocomplete"
 }

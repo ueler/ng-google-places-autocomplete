@@ -17,7 +17,7 @@ import PlaceDetailsRequest = google.maps.places.PlaceDetailsRequest;
 @Component({
   selector: 'lib-ng-google-places-autocomplete',
   template: `
-    <div *ngIf="dataSource" class="input-with-button google-places-autocomplete">
+    <div *ngIf="dataSource" class="google-places-autocomplete">
       <input [(ngModel)]="addressInputText"
              [typeahead]="dataSource"
              [typeaheadAsync]="true"
@@ -30,7 +30,7 @@ import PlaceDetailsRequest = google.maps.places.PlaceDetailsRequest;
     </div>
     <div #attributions></div>
   `,
-  styles: []
+  styleUrls: ['./ng-google-places-autocomplete.component.scss']
 })
 export class NgGooglePlacesAutocompleteComponent implements OnInit {
 
