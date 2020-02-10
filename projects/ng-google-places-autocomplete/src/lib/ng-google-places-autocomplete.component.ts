@@ -116,7 +116,8 @@ export class NgGooglePlacesAutocompleteComponent implements OnInit {
     };
 
     this.placesService.getDetails(request, (result, status) => {
-      this.addressChanged.emit(result);
+      // run inside zone to correctly trigger change detection
+      this.ngZone.run(() => this.addressChanged.emit(result));
     });
   }
 }
