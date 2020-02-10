@@ -1,22 +1,14 @@
-import {
-  ApplicationRef,
-  ChangeDetectorRef,
-  Component,
-  ElementRef,
-  EventEmitter,
-  Inject,
-  Input,
-  NgZone,
-  OnInit,
-  Output,
-  ViewChild
-} from '@angular/core';
+import {ApplicationRef, Component, ElementRef, EventEmitter, Inject, Input, NgZone, OnInit, Output, ViewChild} from '@angular/core';
 import {HttpParams} from '@angular/common/http';
-import {bindCallback, Observable, timer} from 'rxjs';
-import {debounce, map, switchMap, tap} from 'rxjs/operators';
+import {bindCallback, Observable} from 'rxjs';
+import {map, switchMap} from 'rxjs/operators';
 import {TypeaheadMatch} from 'ngx-bootstrap/typeahead';
 import {NgLazyloadScriptService} from '@ueler/ng-lazyload-script';
-import {NG_GOOGLE_PLACES_AUTOCOMPLETE_SETTINGS, NgGooglePlacesAutocompleteSettings} from './ng-google-places-autocomplete-settings';
+import {
+  NG_GOOGLE_PLACES_AUTOCOMPLETE_SETTINGS,
+  NgGooglePlacesAutocompleteSettings
+} from './settings/ng-google-places-autocomplete-settings';
+import {AutocompletionRequestOptions} from './settings/autocompletion-request-options';
 import PlaceResult = google.maps.places.PlaceResult;
 import AutocompletionRequest = google.maps.places.AutocompletionRequest;
 import AutocompletePrediction = google.maps.places.AutocompletePrediction;
@@ -26,8 +18,7 @@ import PlaceDetailsRequest = google.maps.places.PlaceDetailsRequest;
   selector: 'lib-ng-google-places-autocomplete',
   template: `
     <div *ngIf="dataSource" class="input-with-button google-places-autocomplete">
-      <input [ngClass]="{'button-visible': addressInputText}"
-             [(ngModel)]="addressInputText"
+      <input [(ngModel)]="addressInputText"
              [typeahead]="dataSource"
              [typeaheadAsync]="true"
              [typeaheadMinLength]="1"
@@ -49,13 +40,13 @@ export class NgGooglePlacesAutocompleteComponent implements OnInit {
   private placesService: google.maps.places.PlacesService;
 
   @Input()
-  addressType: string;
-
-  @Input()
   addressInputText = '';
 
   @Output()
   addressChanged: EventEmitter<PlaceResult> = new EventEmitter();
+
+  @Input()
+  requestOptions?: AutocompletionRequestOptions;
 
   @ViewChild('addressInput', {static: false}) addressInput: ElementRef;
 
@@ -95,9 +86,8 @@ export class NgGooglePlacesAutocompleteComponent implements OnInit {
 
   getPredictionsAsObservable(input: string): Observable<AutocompletePrediction[]> {
     const request: AutocompletionRequest = {
-      input,
-      componentRestrictions: {country: 'CH'},
-      types: [this.addressType]  // 'establishment' / 'address' / 'geocode'
+      ...this.requestOptions,
+      input
     };
 
     const callBackAsObservable = bindCallback((arg, callbackFunc) => {
