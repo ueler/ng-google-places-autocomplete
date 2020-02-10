@@ -19,7 +19,17 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: npm install
+      - name: npm install (root)
+        run: |
+          npm ci
+
+      - name: npm install (lib)
+        working-directory: ./projects/ng-google-places-autocomplete
+        run: |
+          npm ci
+
+      - name: npm install (example)
+        working-directory: ./projects/ng-google-places-autocomplete-example
         run: |
           npm ci
 
