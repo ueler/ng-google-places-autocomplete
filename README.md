@@ -8,9 +8,12 @@ This library offers a component
 to easily integrate a Google Maps Places autocomplete typeahead into your project.
 
 ### Features
+- Lightweight (only 4KB gzipped)
 - Uses Bootstrap styling classes
 - Configurable request options (e.g. to limit the results to specific country)
+- Configurable places details options (e.g. get longitude/latitude from selected place)
 - Returns places details (including long,lat,etc.) when user selects an option
+- Loads the Google Maps Javascript API lazily (only when the component is used, i.e. it doesn't add to the bundle size upfront)
 
 ## Stackblitz Example App
 See the component in action in this example app:
