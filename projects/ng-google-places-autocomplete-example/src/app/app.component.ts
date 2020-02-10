@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {AutocompletionRequestOptions} from '../../../ng-google-places-autocomplete/src/public-api';
+import {AutocompletionRequestOptions, PlacesDetailsRequestOptions} from '../../../ng-google-places-autocomplete/src/public-api';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +8,13 @@ import {AutocompletionRequestOptions} from '../../../ng-google-places-autocomple
 })
 export class AppComponent {
 
-  requestOptions: AutocompletionRequestOptions = {
+  autocompletionOptions: AutocompletionRequestOptions = {
     componentRestrictions: {country: 'CH'},
     types: ['geocode']
+  };
+
+  placesDetailsOptions: PlacesDetailsRequestOptions = {
+    fields: ['geometry']
   };
 
   addressChanged($event: google.maps.places.PlaceResult) {

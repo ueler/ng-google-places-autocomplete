@@ -1,3 +1,6 @@
 <h1>NgGooglePlacesAutocompleteExample</h1>
-<lib-ng-google-places-autocomplete (addressChanged)="addressChanged($event)" [requestOptions]="requestOptions">
+<lib-ng-google-places-autocomplete (addressChanged)="addressChanged($event)"
+                                   [autocompletionOptions]="autocompletionOptions"
+                                   [placesDetailsOptions]="placesDetailsOptions"
+                                   inputPlaceholder="Enter a place">
 </lib-ng-google-places-autocomplete>

@@ -9,6 +9,7 @@ import {
   NgGooglePlacesAutocompleteSettings
 } from './settings/ng-google-places-autocomplete-settings';
 import {AutocompletionRequestOptions} from './settings/autocompletion-request-options';
+import {PlacesDetailsRequestOptions} from './settings/places-details-request-options';
 import PlaceResult = google.maps.places.PlaceResult;
 import AutocompletionRequest = google.maps.places.AutocompletionRequest;
 import AutocompletePrediction = google.maps.places.AutocompletePrediction;
@@ -17,20 +18,7 @@ import PlacesServiceStatus = google.maps.places.PlacesServiceStatus;
 
 @Component({
   selector: 'lib-ng-google-places-autocomplete',
-  template: `
-    <div *ngIf="dataSource" class="google-places-autocomplete">
-      <input [(ngModel)]="addressInputText"
-             [typeahead]="dataSource"
-             [typeaheadAsync]="true"
-             [typeaheadMinLength]="1"
-             (typeaheadOnSelect)="optionSelect($event)"
-             typeaheadOptionField="description"
-             class="form-control"
-             placeholder="Enter a place"
-             aria-label="Place search input">
-    </div>
-    <div #attributions></div>
-  `,
+  templateUrl: './ng-google-places-autocomplete.component.html',
   styleUrls: ['./ng-google-places-autocomplete.component.scss']
 })
 export class NgGooglePlacesAutocompleteComponent implements OnInit {
@@ -41,13 +29,19 @@ export class NgGooglePlacesAutocompleteComponent implements OnInit {
   private placesService: google.maps.places.PlacesService;
 
   @Input()
-  addressInputText = '';
+  inputPlaceholder = '';
+
+  @Input()
+  inputText = '';
 
   @Output()
   addressChanged: EventEmitter<PlaceResult> = new EventEmitter();
 
   @Input()
-  requestOptions?: AutocompletionRequestOptions;
+  autocompletionOptions?: AutocompletionRequestOptions;
+
+  @Input()
+  placesDetailsOptions?: PlacesDetailsRequestOptions;
 
   @ViewChild('addressInput', {static: false}) addressInput: ElementRef;
 
@@ -79,7 +73,7 @@ export class NgGooglePlacesAutocompleteComponent implements OnInit {
 
     this.dataSource = new Observable((observer: any) => {
       // runs on every search
-      observer.next(this.addressInputText);
+      observer.next(this.inputText);
     }).pipe(
       switchMap((input: string) => this.getPredictionsAsObservable(input))
     );
@@ -87,7 +81,7 @@ export class NgGooglePlacesAutocompleteComponent implements OnInit {
 
   getPredictionsAsObservable(input: string): Observable<AutocompletePrediction[]> {
     const request: AutocompletionRequest = {
-      ...this.requestOptions,
+      ...this.autocompletionOptions,
       input
     };
 
@@ -115,7 +109,8 @@ export class NgGooglePlacesAutocompleteComponent implements OnInit {
     const data = $event.item as AutocompletePrediction;
     const request: PlaceDetailsRequest = {
       placeId: data.place_id,
-      fields: ['geometry', 'formatted_address']
+      fields: ['geometry', 'formatted_address'],
+      ...this.placesDetailsOptions
     };
 
     this.placesService.getDetails(request, (result, status) => {

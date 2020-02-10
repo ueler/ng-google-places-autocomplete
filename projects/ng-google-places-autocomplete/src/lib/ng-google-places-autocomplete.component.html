@@ -1,0 +1,12 @@
+<div *ngIf="dataSource" class="google-places-autocomplete">
+  <input [(ngModel)]="inputText"
+         [typeahead]="dataSource"
+         [typeaheadAsync]="true"
+         [typeaheadMinLength]="1"
+         (typeaheadOnSelect)="optionSelect($event)"
+         typeaheadOptionField="description"
+         class="form-control"
+         placeholder="{{inputPlaceholder}}"
+         aria-label="Place search input">
+</div>
+<div #attributions></div>
